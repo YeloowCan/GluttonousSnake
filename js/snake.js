@@ -31,7 +31,7 @@
     }
   };
 
-  Snake.prototype.move = function () {
+  Snake.prototype.move = function (food, map) {
     for (var i = this.body.length - 1; i > 0; i--) {
       this.body[i].x = this.body[i - 1].x;
       this.body[i].y = this.body[i - 1].y;
@@ -52,12 +52,22 @@
         head.y += 1;
         break;
     }
+
+    var headx = head.x * this.width;
+    var heady = head.y * this.height;
+    if (headx === food.x && heady === food.y) {
+      var last = this.body[this.body.length - 1];
+      this.body.push({
+        ...last,
+      });
+      food.render(map);
+    }
   };
 
   function remove() {
     for (var i = elements.length - 1; i >= 0; i--) {
       elements[i].parentNode.removeChild(elements[i]);
-      elements.splice(i, 0);
+      elements.splice(i, 1);
     }
   }
 
