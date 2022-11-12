@@ -47,7 +47,3 @@
 
   window.Food = Food;
 })();
-
-var map = document.getElementById('map');
-var food = new Food();
-food.render(map);
